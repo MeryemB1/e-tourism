@@ -38,6 +38,12 @@ function Mappage() {
   const [useradress,setuseradress]=useState(null);
   const [map,setmap]=useState(null);
 
+ 
+  useEffect(()=>{
+    const instruction=document.getElementById("instructions");
+    instruction.style.display="none";
+  },[]);
+
     const getRoute = async() => {
       const end = [selectedwilaya.latitude,selectedwilaya.longitude];
       const start = [userlongitude,userlatitude]; 
@@ -149,7 +155,10 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
     setIsOpen(false);
   };
 
-
+ function setvisibleinstruction(){
+  const instru=document.getElementById("instructions");
+  instru.style.display="block";
+ }
 
 
 
@@ -306,6 +315,7 @@ kind , really recommend it !</p>
               onClick={()=>{console.log(selectedwilaya);
               setshowsidebar(true);
             setclickedwilaya(wilaya);
+            setvisibleinstruction();
           getRoute()}}
             >
                  <img src={mark} width={15} height={20}/>
