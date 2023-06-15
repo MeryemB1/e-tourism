@@ -1,0 +1,41 @@
+#closebutton {
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.divimagetext{
+    display: inline;
+}
+
+#submit {
+    width: 20%;
+    height: 17%;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    color:white;
+    margin-top: 2%;
+    margin-left: 10%;
+    font-family: Poppins;
+}
+#commentairearea{
+    width: 80%;
+    border-radius: 10px;
+    background-color: lightgrey;
+    border : none;
+    padding: 2%;
+   margin-left: 2%;
+}
+.textimage{
+    display: flex;
+    align-items: flex-start;
+    
+}
+#componentpopup{
+    font-family: Poppins;
+    border-radius: 100px;
+}

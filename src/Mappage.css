@@ -1,0 +1,315 @@
+.Mappage {
+  text-align: center;
+  
+}
+.whole{
+  display: flex;
+}
+.Usersection {
+  background-color: #52FF00;
+  border-radius: 30px;
+  width: 12%;
+  height: 40px;
+  z-index: 4;
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+}
+#userimage {
+  width: 20%;
+  margin-right: 8%;
+}
+#commenter{
+  position: absolute;
+  right: 2px;
+  z-index: 4;
+  top: 85px;
+font-weight: 500;
+  width: 7%;
+  height: 40px;
+  border-radius: 30px;
+  background-color:black;
+  color: white;
+  font-family: Poppins;
+  font-size: 11px;
+  cursor: pointer;
+  border: none;
+}
+
+.selec{
+  
+  width: 4%;
+  margin-right: 3%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 15%;
+}
+.location{
+  border: 1px solid rgba(255, 255, 255, 0.47);
+border-radius: 29px;
+  height: 40%;
+  width:120%;
+  display: flex;
+  justify-content: space-between;
+   align-items: center;
+   margin-bottom: 3%;
+   padding-left: 7%;
+  padding-right: 7%;
+ 
+}
+.filtrage{
+  font-family: Poppins;
+  background-color:white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 20%;
+  height: 40px;
+  z-index: 4;
+  position: absolute;
+  top: 4px;
+  right:14%;
+  display: flex;
+padding-left: 3%;
+padding-right: 3%;
+  justify-content: space-between ;
+  align-items: center;
+}
+.filtrage select {
+  font-family: Poppins;
+  height: 70%;
+  width: 35%;
+  border-radius: 7px;
+  border: none;
+  font-size: 12px;
+
+ background-color: #52FF00;
+}
+
+.plocationdiv{
+  margin-top: 6%;
+  
+}
+
+
+.destination{
+  border: 1px solid rgba(255, 255, 255, 0.47);
+border-radius: 29px;
+  height: 40%;
+  width:120%;
+  display: flex;
+  justify-content: space-between;
+   align-items: center;
+   padding-left: 7%;
+  padding-right: 7%;
+ 
+}
+.transportdiv{
+ 
+  margin-top: 2%; 
+  display:flexbox;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+ 
+  
+}
+
+
+
+
+
+
+#person{
+ width: 70%;
+}
+.personinfo{
+ 
+  padding-top: 7%;
+  padding-left:1%;
+  height: 40%;
+ display: flex;
+ margin-bottom: 0%;
+}
+.name{
+  margin-left: 1%;
+  width:60%;
+   line-height: 1%;
+   text-align: left;
+   
+}
+.commentcontent{
+  
+  margin-top: -10%;
+  text-align: left;
+  font-size: smaller;
+  height: 60%;
+  padding-left: 7%;
+  padding-right: 7%;
+}
+.commentcontent h4{
+  margin-bottom: 1%;
+}
+.commentcontent p {
+  margin-top: 0%;
+  font-size: 10px;
+  opacity: 60%;
+}
+
+.name p{
+  opacity:60%;
+  font-size: small;
+
+  
+}
+.imagecontainer {
+
+  
+  width: fit-content;
+}
+#invisible{
+  background-color: transparent;
+  cursor: pointer;
+  border: 0ch;
+}
+#titre{
+  right: 0;
+}
+
+
+.popup {
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1;
+}
+.commentsection{
+  
+  max-width: 69%;
+  height: 32%;
+  z-index: 5;
+  position: absolute;
+  bottom: 0;
+  display:flex;
+  left: 31%;
+  overflow-x:auto;
+  
+}
+.comment{
+  background-color: white;
+  border-radius: 10px;
+  min-width: 250px;
+  height: 165px;
+  margin-bottom: 1%;
+  margin-left: 2%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  
+}
+#photo{
+  width: 50%;
+}
+.image{
+ 
+  display: flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  margin: 2%;
+}
+.titletext{
+  
+  width: 60%;
+  height: 60%;
+  background-color: #52FF00;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: black;
+}
+#instructions{
+  background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 4;
+  width: 20%;
+  left: 31%;
+  height: 50%;
+  overflow-y: scroll;
+  border-radius: 15px;
+ 
+}
+#instructions li{
+  font-size: 10px;
+  text-align: left;
+}
+#instructions p {
+  color:#52FF00;
+}
+#instructions::-webkit-scrollbar {
+  width: 6px;
+}
+
+#instructions::-webkit-scrollbar-thumb {
+  background-color:#52FF00;
+  border-radius: 5px;
+  height: 20%;
+}
+
+#instructions::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+
+.Description {
+  text-align: start;
+  margin-left: 8%;
+  width: 85%;
+}
+
+.Description p {
+  margin-top: 1%;
+  font-weight: 400;
+font-size: 12px;
+line-height: 21px;
+
+color: rgba(255, 255, 255, 0.63);
+
+}
+.Description h4{
+  margin-bottom: 0px;
+  margin-top: 1.5%;
+}
+
+
+.container{
+  margin-top: -15%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ height: 70px;
+}
+.sidebar{
+  font-family: Poppins;
+  height:100%;
+  width: 30%;
+  left: 0;
+  display: block;
+  
+  background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 2;
+}
+
+
+

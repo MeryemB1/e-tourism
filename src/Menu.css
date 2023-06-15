@@ -1,0 +1,27 @@
+.Menu {
+    position: fixed;
+    background-color: white;
+    width: 95%;
+    right: 0%;
+    height: 8%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.Menu h2 {
+    margin-top: 0.5%;
+    margin-left: 1.5%;
+    font-family: Poppins;
+}
+#user {
+    margin-top: 0.5%;
+    margin-right: 1%;
+}
+.Menu input {
+    width: 25%;
+    height: 60%;
+    margin-top: 0.5%;
+    border-width: 1px;
+    border-color: rgba(175, 169, 169, 0.69);
+    border-radius: 4px;
+}

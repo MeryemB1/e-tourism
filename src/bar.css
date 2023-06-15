@@ -1,0 +1,36 @@
+.Bar {
+    position : fixed;
+    height:100%;
+    width:5%;
+    background-color: black;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+#algerialogo{
+   margin-top: 15%; 
+}
+.buttonsection{
+    margin-top: 300%;
+    display: flex;
+    width: 100%;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+.buttonsection button {
+    border-radius: 6px;
+    margin-bottom: 40%;
+    width: 64%; 
+   
+    height: 40px;
+    background-color:black;
+    cursor: pointer;
+    border: none;
+}
+.buttonsection button :hover{
+    background-color:rgba(217, 217, 217, 0.32);
+   
+}
+
