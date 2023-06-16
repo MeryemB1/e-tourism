@@ -287,7 +287,7 @@ kind , really recommend it !</p>
         style={{
           width: "100%",
           height: "600px",
-          borderRadius: "15px",
+          borderRadius: "0px",
           
         }}
         initialViewState={{
@@ -321,12 +321,14 @@ kind , really recommend it !</p>
                  <img src={mark} width={15} height={20}/>
             </button>
             {isHovered && selectedwilaya !== null && wilaya.id===selectedwilaya.id && <Popup text={selectedwilaya.name}/>}
+          
           </Marker>
         ))}
           
          
         
-       
+          {showSideBar === false && clickedwilaya === null && <div className="nosidebar"> cliquez sur un lieu </div>}
+
         <NavigationControl position="bottom-right" />
         <FullscreenControl />
 

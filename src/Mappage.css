@@ -247,6 +247,20 @@ border-radius: 29px;
   border-radius: 15px;
  
 }
+.nosidebar{
+  font-family: Poppins;
+  height:100%;
+  width: 30%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 2;
+}
 #instructions li{
   font-size: 10px;
   text-align: left;

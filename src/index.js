@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Mappage from './Mappage';
 import Algeria from './Algeria';
+import Travelplan from './Travelplan';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter , createBrowserRouter, RouterProvider,Route} from "react-router-dom";
 const router=createBrowserRouter([
@@ -14,6 +15,10 @@ const router=createBrowserRouter([
   path: "/",
   element: <Algeria/>,
 },
+{
+  path:"/travelplan",
+  element : <Travelplan/>
+}
 
 ]);
 
