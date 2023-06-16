@@ -17,7 +17,7 @@ export function Model(props) {
   const modelRef = useRef();
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime();
-    modelRef.current.rotation.y = elapsedTime * 0.7; // Adjust the rotation speed as desired
+    modelRef.current.rotation.y = elapsedTime * 0.8; // Adjust the rotation speed as desired
   });
   return (
     <group {...props} dispose={null}  ref={modelRef}>
