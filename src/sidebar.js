@@ -9,14 +9,18 @@ const Sidebar = ({obj}) => {
   const [adress, setadress]=useState(obj.useradress.substring(0, 23) + '...');
   const [destination,setdestination]=useState(null);
   useEffect(()=>{
-    fetch(
-      `https://api.geoapify.com/v1/geocode/reverse?lat=${obj.clickedwilaya.longitude}&lon=${obj.clickedwilaya.latitude}&apiKey=7427512d37674feaa51c62a9983360a5`,
-       { method: 'GET' }
-      
-    ).then(response => response.json())
-    .then(result => setdestination(result.features[0].properties.formatted.substring(0, 23) + '...'))
    
-    .catch(error => console.log('error', error));
+      fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${obj.clickedwilaya.latitude}&lon=${obj.clickedwilaya.longitude}&apiKey=7427512d37674feaa51c62a9983360a5`,
+         { method: 'GET' }
+        
+      ).then(response => response.json())
+      .then(result => setdestination(result.features[0].properties.formatted.substring(0, 23) + '...'))
+     
+      .catch(error => console.log('error', error));
+    
+   
+    
   },[obj])
   
   
@@ -26,18 +30,21 @@ const Sidebar = ({obj}) => {
     </div>
     <div className='container'>
     <div className='titletext'>
-    <h3> {obj.clickedwilaya.name} </h3>
+    <h3> {obj.clickedwilaya.name || obj.clickedwilaya.description.substring(0,14)+'..'} </h3>
     </div>
     
     </div>
-    <img src={photo} alt="photo" id="photo"/>
+    <img src={obj.clickedwilaya.IMAGE} alt="photo" id="photo"/>
     <div className='Description'>
+       
         <h4>Description</h4>
-      <p>Wherever the kind of destination you’re willing
-to go to , or  live a wild experience in Algeria ! </p>
+        <p>{obj.clickedwilaya.debut + " /"+ obj.clickedwilaya.fin }
+        </p>
+      <p>{obj.clickedwilaya.description}</p>
 <h4>Openning</h4>
-<p>everyday from 8:00 am to 10:00 pm </p>
+<p>{obj.clickedwilaya.accesstime}</p>
 <h4>Transport</h4>
+<p>{obj.clickedwilaya.transport }</p>
 <div className="whole">
    
 <div className='selec'>

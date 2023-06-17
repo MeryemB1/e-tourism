@@ -11,8 +11,8 @@ const Algeria =()=>{
     
     const navigate = useNavigate();
 
-  const handleClick = (data) => {
-    navigate('/Mappage',{state:{data}});
+  const handleClick = (wilaya) => {
+    navigate('/Mappage',{state:{wilaya}});
   };
       const data = {
         Adrar: 0,
@@ -94,7 +94,7 @@ const Algeria =()=>{
           width="800px"
           data={data}
           onWilayaClick={(wilaya, data) => {console.log(wilaya, data);
-            handleClick(data);
+            handleClick(wilaya);
         }}
         />
         </div>

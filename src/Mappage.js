@@ -6,11 +6,13 @@ import React, { useRef, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import userimage from './assets/userimage.png';
 import mapwilaya from './wilayas.json';
+import activity from './activitiesAlger.json';
 import Popup from './littlepopup';
 import Sidebar from './sidebar';
 import axios from 'axios';
 import person from "./assets/comperson.png";
 import PopupComponent from "./Popupcomponent";
+import active from './assets/active.png';
 import Map,{
   Marker,
   NavigationControl,
@@ -20,11 +22,14 @@ import Map,{
   GeolocateControl,
 } from "react-map-gl";
 import { useState } from "react";
+import { Activity } from "lucide-react";
+import { act } from "react-dom/test-utils";
 function Mappage() {
   const location=useLocation();
   const [lng, setLng] = useState(1.6667);
   const [lat, setLat] = useState(28.0290);
   const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredactivity, setIsHoveredactivity] = useState(false);
   const [selectedwilaya, setSelectedwilaya] = useState(null);
   const [showSideBar, setshowsidebar]=useState(false);
   const [clickedwilaya,setclickedwilaya]=useState(null);
@@ -37,14 +42,29 @@ function Mappage() {
   const [map,setmap]=useState(null);
   const [categorie,setcategorie]=useState("");
   const [type,settype]=useState("");
- 
-  /*useEffect(()=>{
+  const [placelenght,setplacelenght]=useState(null);
+  const [activitylenght,setactivitylenght]=useState(null);
+  const [selectedactivity,setselectedactivity]=useState("");
+  const [globaletablen,setglobaletable]=useState([]);
+  const [common,setcommen]=useState();
+  useEffect(()=>{
     const instruction=document.getElementById("instructions");
     instruction.style.display="none";
   },[]);
+  useEffect(()=>{
+    for( var i=0;i<mapwilaya.length;i++)
+    {
+        if (mapwilaya[i].name===location.state.wilaya)
+        {
+          setLng(mapwilaya.latitude);
+          setLat(mapwilaya.longitude)
+        }
+    }
+  },[])
+  
   ////getting places of the wilaya 
   useEffect(()=>{
-    const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
+    const accessToken = 'a0A1F4y91M1K_MicnBuj1mzvYAn2jufRfzbmL8KCUkvjE';
     const requestOptions = {
       method: 'GET', 
       headers: {
@@ -54,7 +74,7 @@ function Mappage() {
       
     };
   
-    fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-place-by-id${id}`, requestOptions)
+    fetch(`https://fennetic_project-1-s9489771.deta.app/api/v1/get-place-by-wilaya/Alger`, requestOptions)
     .then(response => response.json())
     .then(data => {
      
@@ -67,7 +87,7 @@ function Mappage() {
 
    },[]);
 //getting activity of the wilaya 
-useEffect(()=>{
+/*useEffect(()=>{
   const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
   const requestOptions = {
     method: 'GET', 
@@ -121,8 +141,9 @@ useEffect(()=>{
 
 
     const getRoute = async() => {
-      const end = [selectedwilaya.latitude,selectedwilaya.longitude];
+      const end = [common.longitude,common.latitude];
       const start = [userlongitude,userlatitude]; 
+      
       // make a directions request using cycling profile
       // an arbitrary start will always be the same
       // only the end or destination will change
@@ -204,7 +225,7 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
           async function (position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-             console.log ("you selected wilaya ", location.state.data+1);
+             console.log ("you selected wilaya ", location.state.wilaya);
             setuserlatitude(latitude);
             setuserlongitude(longitude);
             const response = await fetch(
@@ -385,13 +406,14 @@ kind , really recommend it !</p>
         {mapwilaya.map(wilaya => (
           <Marker
             key={wilaya.id}
-            latitude={wilaya.longitude}
-            longitude={wilaya.latitude}
+            latitude={wilaya.latitude}
+            longitude={wilaya.longitude}
           >
             <button id="invisible"
               className="marker-btn"
               onMouseEnter={() => {setIsHovered(true);
-              setSelectedwilaya(wilaya) }}
+              setSelectedwilaya(wilaya)
+            setcommen(wilaya) }}
               onMouseLeave={() => {setIsHovered(false);
                 
               }}
@@ -404,10 +426,42 @@ kind , really recommend it !</p>
                  <img src={mark} width={15} height={20}/>
             </button>
             {isHovered && selectedwilaya !== null && wilaya.id===selectedwilaya.id && <Popup text={selectedwilaya.name}/>}
-          
+            
           </Marker>
         ))}
-          
+
+
+
+{activity.map(activity => (
+          <Marker
+            key={activity.id+200}
+            latitude={activity.latitude}
+            longitude={activity.longitude}
+          >
+            <button id="invisible"
+             className="marker-btn"
+             onMouseEnter={() => {setIsHoveredactivity(true);
+             setselectedactivity(activity);
+            setcommen(activity) }}
+             onMouseLeave={() => {setIsHoveredactivity(false);
+               
+             }}
+             onClick={()=>{console.log(selectedactivity);
+              setshowsidebar(true);
+            setclickedwilaya(activity);
+            setvisibleinstruction();
+             getRoute()}
+        }
+            >
+                 <img src={active} width={20} height={20} />
+            </button>
+            {isHoveredactivity && selectedactivity !== null && activity.id===selectedactivity.id && <Popup text={selectedactivity.id}/>}
+            
+          </Marker>
+        ))}
+        
+        
+        
          
         
           {showSideBar === false && clickedwilaya === null && <div className="nosidebar"> cliquez sur un lieu </div>}

@@ -1,0 +1,38 @@
+[
+{
+    "id":"1",
+    "sortietime":"14:00",
+    "IMAGE":"https://lh3.googleusercontent.com/p/AF1QipMJK7gvn-hkB8WSs4uMipmQTPx1_-PQoUsLFc50=s1360-w1360-h1020",
+    "description":"Organized trip to ELhammah",
+    "accesstime" :"from 8:00 to 20:00",
+    "longitude": "3.2000",
+    "latitude" : "36.7200",
+    "debut":"12-07-2023",
+    "fin":"15-07-2023",
+    "wilaya":"Alger"
+},
+{
+    "id":"2",
+    "sortietime":"14:00",
+    "IMAGE":"https://lh3.googleusercontent.com/p/AF1QipPSnQBgvZmepl2zrh0WsrGvbKFtXSYHSyedn-Gc=s1360-w1360-h1020",
+    "description":"Organized trip to Maquam Elchahid",
+    "accesstime" :"from 8:00 to 19:00",
+    "longitude": "3.049067",
+    "latitude" : "36.753512",
+    "debut":"12-07-2023",
+    "fin":"15-07-2023",
+    "wilaya":"Alger"
+},
+{
+    "id":"3",
+    "sortietime":"14:00",
+    "IMAGE":"https://lh3.googleusercontent.com/proxy/WDYsQvVZL6Qj9Fqrq9jqOurDE2JCb3mrbdZyHfUgqozpCrjnstZboDPI9wyyes8JmTmjQB8uswVB_vcGSBYOe3laDrOJaH3dLENMUytHyCfoaxeR0vJoEQSs9Okop6JK_xKtYhq3jKD8jWDBaC_QYkWpLBcQUg=s1360-w1360-h1020",
+    "description":"Discovery of (notre Damme d'affrique)",
+    "accesstime" :"from 8:00 to 18:00",
+    "longitude": "3.042667",
+    "latitude" : "36.800903",
+    "debut":"12-07-2023",
+    "fin":"15-07-2023",
+    "wilaya":"Alger"  
+}
+]
