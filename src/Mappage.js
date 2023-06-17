@@ -5,8 +5,6 @@ import mark from "./assets/marker.png";
 import React, { useRef, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import userimage from './assets/userimage.png';
-import mapwilaya from './wilayas.json';
-import activity from './activitiesAlger.json';
 import Popup from './littlepopup';
 import Sidebar from './sidebar';
 import axios from 'axios';
@@ -24,7 +22,11 @@ import Map,{
 import { useState } from "react";
 import { Activity } from "lucide-react";
 import { act } from "react-dom/test-utils";
+import { comment } from "postcss";
+
 function Mappage() {
+  const [mapwilaya,setmapwilaya]=useState([]);
+  const [activity,setactivity]=useState([]);
   const location=useLocation();
   const [lng, setLng] = useState(1.6667);
   const [lat, setLat] = useState(28.0290);
@@ -35,6 +37,7 @@ function Mappage() {
   const [clickedwilaya,setclickedwilaya]=useState(null);
   const [isready,setisready]=useState(true);
   const [userlatitude, setuserlatitude]=useState(null);
+ 
   const [userlongitude,setuserlongitude]=useState(null);
   const mapRef = useRef(null);
   const [useremail,setuseremail]=useState("km_karim@esi.dz");
@@ -47,6 +50,8 @@ function Mappage() {
   const [selectedactivity,setselectedactivity]=useState("");
   const [globaletablen,setglobaletable]=useState([]);
   const [common,setcommen]=useState();
+  const [commentairecontent,setcommentairecontent]=useState([]);
+  const [click,setclick]=useState({});
   useEffect(()=>{
     const instruction=document.getElementById("instructions");
     instruction.style.display="none";
@@ -61,87 +66,63 @@ function Mappage() {
         }
     }
   },[])
-  
-  ////getting places of the wilaya 
   useEffect(()=>{
-    const accessToken = 'a0A1F4y91M1K_MicnBuj1mzvYAn2jufRfzbmL8KCUkvjE';
-    const requestOptions = {
-      method: 'GET', 
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      
-    };
-  
-    fetch(`https://fennetic_project-1-s9489771.deta.app/api/v1/get-place-by-wilaya/Alger`, requestOptions)
-    .then(response => response.json())
-    .then(data => {
-     
-      console.log(data);
-    })
-    .catch(error => {
-     
-      console.error(error);
-    });
-
-   },[]);
-//getting activity of the wilaya 
-/*useEffect(()=>{
-  const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
-  const requestOptions = {
-    method: 'GET', 
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    
-  };
-
-  fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-activity${id}`, requestOptions)
+    fetch(`https://ffenneticcc.onrender.com/api/v1/get-place-by-wilaya/${location.state.wilaya}`)
   .then(response => response.json())
   .then(data => {
-   
+    // Process the response data
     console.log(data);
+    setmapwilaya(data);
   })
   .catch(error => {
-   
-    console.error(error);
+    // Handle any errors
+    console.error('Error:', error);
+  });
+
+  },[])
+
+//getting activity of the wilaya 
+useEffect(()=>{
+
+  fetch(`https://ffenneticcc.onrender.com/api/v1/get-activity-by-wilaya/${location.state.wilaya}`)
+  .then(response => response.json())
+  .then(data => {
+    // Process the response data
+    console.log(data);
+    setactivity(data);
+  })
+  .catch(error => {
+    // Handle any errors
+    console.error('Error:', error);
   });
 
  },[]);
 
  //get comments 
- useEffect(()=>{
-  const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
-  const requestOptions = {
-    method: 'GET', 
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    
-  };
+ const [verif,setverif]=useState(false);
+ function getcomments(id){
 
-  fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-place-comments${id}`, requestOptions)
+  fetch(`https://ffenneticcc.onrender.com/api/v1/get-place-comments/{id}?Placeid=${id}`)
   .then(response => response.json())
   .then(data => {
    
     console.log(data);
+    setcommentairecontent(data);
+    setverif(true);
   })
   .catch(error => {
    
     console.error(error);
   });
-
- },[]);*/
+   
+ };
 
 
 
 
 
     const getRoute = async() => {
-      const end = [common.longitude,common.latitude];
+     
       const start = [userlongitude,userlatitude]; 
       
       // make a directions request using cycling profile
@@ -151,7 +132,7 @@ function Mappage() {
       const mapboxAccessToken = 'pk.eyJ1IjoibWVyeWVtLWJhdCIsImEiOiJjbGg0bHNiZ2swMHJuM2xteXFsdnN5cWdwIn0.aGU-t7riZ-UtdRHm0rDZ4Q'; // Replace with your Mapbox access token
       
       const response = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxAccessToken}`,
+        `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${common.longitude || common.longi},${common.latitude ||common.latti}?steps=true&geometries=geojson&access_token=${mapboxAccessToken}`,
         { method: 'GET' }
       );
       const json = await response.json();
@@ -263,6 +244,7 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
   //////requete pour le filtrage des types et des categorie 
   setisready(!isready);
  }
+ 
 
   return (
     <div className="Mappage">
@@ -297,95 +279,31 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
      <div id="instructions"></div>
       
      <div className="commentsection">
-      <div className="comment">
-       
-        <div className="personinfo">
-          <div className="imagecontainer">
-          <img src={person} alt="person" id="person"/>
-          </div>
+     
           
-      
-        <div className="name">
-              <h3>Cooper Aminoff</h3>
+      { Array.isArray(commentairecontent) && commentairecontent!==null && commentairecontent.map(()=>(
+         <div className="comment" id="comment">
+       
+         <div className="personinfo">
+           <div className="imagecontainer">
+           <img src={person} alt="person" id="person"/>
+           </div>
+           <div className="name">
+              <h3>{commentairecontent.emailUser}</h3>
               <p>Date : 30/11/2020</p>
         </div>
 
         </div>
         <div className="commentcontent">
           <h4>Comment</h4>
-          <p>I have just visited this place , and i was amazed about how 
-much it’s beatiful and how much people are welcoming and 
-kind , really recommend it !</p>
+          <p>{commentairecontent.description}</p>
         </div>
         
       </div>
-      <div className="comment">
-       
-       <div className="personinfo">
-
-         <div className="imagecontainer">
-         <img src={person} alt="person" id="person"/>
-         </div>
-     
-       <div className="name">
-             <h3>Cooper Aminoff</h3>
-             <p>Date : 30/11/2020</p>
-       </div>
-
-       </div>
-       <div className="commentcontent">
-         <h4>Comment</h4>
-         <p>I have just visited this place , and i was amazed about how 
-much it’s beatiful and how much people are welcoming and 
-kind , really recommend it !</p>
-       </div>
-       
+      ))}
+        
      </div>
-     <div className="comment">
-       
-       <div className="personinfo">
-
-         <div className="imagecontainer">
-         <img src={person} alt="person" id="person"/>
-         </div>
-     
-       <div className="name">
-             <h3>Cooper Aminoff</h3>
-             <p>Date : 30/11/2020</p>
-       </div>
-
-       </div>
-       <div className="commentcontent">
-         <h4>Comment</h4>
-         <p>I have just visited this place , and i was amazed about how 
-much it’s beatiful and how much people are welcoming and 
-kind , really recommend it !</p>
-       </div>
-       
-     </div>
-     <div className="comment">
-       
-       <div className="personinfo">
-
-         <div className="imagecontainer">
-         <img src={person} alt="person" id="person"/>
-         </div>
-     
-       <div className="name">
-             <h3>Cooper Aminoff</h3>
-             <p>Date : 30/11/2020</p>
-       </div>
-
-       </div>
-       <div className="commentcontent">
-         <h4>Comment</h4>
-         <p>I have just visited this place , and i was amazed about how 
-much it’s beatiful and how much people are welcoming and 
-kind , really recommend it !</p>
-       </div>
-       
-     </div>
-     </div>
+    
       <Map
         mapboxAccessToken="pk.eyJ1IjoibWVyeWVtLWJhdCIsImEiOiJjbGg0bHNiZ2swMHJuM2xteXFsdnN5cWdwIn0.aGU-t7riZ-UtdRHm0rDZ4Q"
         style={{
@@ -419,24 +337,24 @@ kind , really recommend it !</p>
               }}
               onClick={()=>{console.log(selectedwilaya);
               setshowsidebar(true);
+              setclick(wilaya);
             setclickedwilaya(wilaya);
+            getcomments(wilaya.id);
             setvisibleinstruction();
           getRoute()}}
             >
                  <img src={mark} width={15} height={20}/>
             </button>
-            {isHovered && selectedwilaya !== null && wilaya.id===selectedwilaya.id && <Popup text={selectedwilaya.name}/>}
+            {isHovered && selectedwilaya !== null && wilaya.id===selectedwilaya.id && <Popup text={selectedwilaya.place_name}/>}
             
           </Marker>
         ))}
 
-
-
-{activity.map(activity => (
+         {activity.map(activity => (
           <Marker
-            key={activity.id+200}
-            latitude={activity.latitude}
-            longitude={activity.longitude}
+            key={activity.id}
+            latitude={activity.latti}
+            longitude={activity.longi}
           >
             <button id="invisible"
              className="marker-btn"
@@ -455,10 +373,12 @@ kind , really recommend it !</p>
             >
                  <img src={active} width={20} height={20} />
             </button>
-            {isHoveredactivity && selectedactivity !== null && activity.id===selectedactivity.id && <Popup text={selectedactivity.id}/>}
+            {isHoveredactivity && selectedactivity !== null && activity.id===selectedactivity.id && <Popup text={selectedactivity.description}/>}
             
           </Marker>
         ))}
+
+
         
         
         

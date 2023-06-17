@@ -11,7 +11,7 @@ const Sidebar = ({obj}) => {
   useEffect(()=>{
    
       fetch(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${obj.clickedwilaya.latitude}&lon=${obj.clickedwilaya.longitude}&apiKey=7427512d37674feaa51c62a9983360a5`,
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${obj.clickedwilaya.latitude || obj.clickedwilaya.latti}&lon=${obj.clickedwilaya.longitude || obj.clickedwilaya.longi}&apiKey=7427512d37674feaa51c62a9983360a5`,
          { method: 'GET' }
         
       ).then(response => response.json())
@@ -30,21 +30,22 @@ const Sidebar = ({obj}) => {
     </div>
     <div className='container'>
     <div className='titletext'>
-    <h3> {obj.clickedwilaya.name || obj.clickedwilaya.description.substring(0,14)+'..'} </h3>
+    <h3> {obj.clickedwilaya.place_name || obj.clickedwilaya.description.substring(0,14)+'..'} </h3>
     </div>
     
     </div>
-    <img src={obj.clickedwilaya.IMAGE} alt="photo" id="photo"/>
+    <img src={obj.clickedwilaya.IMAGE ||obj.clickedwilaya.image } alt="photo" id="photo"/>
     <div className='Description'>
-       
         <h4>Description</h4>
-        <p>{obj.clickedwilaya.debut + " /"+ obj.clickedwilaya.fin }
+        <p>{obj.clickedwilaya.debutDate
+ + "/"+ obj.clickedwilaya.finDate
+ || " " }
         </p>
       <p>{obj.clickedwilaya.description}</p>
 <h4>Openning</h4>
-<p>{obj.clickedwilaya.accesstime}</p>
+<p>{obj.clickedwilaya.acces || obj.clickedwilaya.accestime }</p>
 <h4>Transport</h4>
-<p>{obj.clickedwilaya.transport }</p>
+<p>{obj.clickedwilaya.transports || "  " }</p>
 <div className="whole">
    
 <div className='selec'>

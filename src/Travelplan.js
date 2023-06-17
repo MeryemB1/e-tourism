@@ -22,16 +22,8 @@ function Travelplan (){
     /// la requete pour avoir le planning 
        const tags= categorieone + ","+categorietwo;
       const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
-      const requestOptions = {
-        method: 'GET', 
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        
-      };
     
-      /*fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-planning${city}${budget}${dayrange}${tags}`, requestOptions)
+      fetch(`https://ffenneticcc.onrender.com/api/v1/get-planning/?city=${city}&budget=${budget}&day_range=${dayrange}&tags=${tags}`)
       .then(response => response.json())
       .then(data => {
        
@@ -42,7 +34,7 @@ function Travelplan (){
       .catch(error => {
        
         console.error(error);
-      });*/
+      });
   
      
     
@@ -134,19 +126,7 @@ return (
                 <div className="displayresults">
                       <h1 >Result</h1>
                       <div className="scrollsection">
-           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+           <p>{responsecontent}</p>
                       </div>
                 </div>
                
