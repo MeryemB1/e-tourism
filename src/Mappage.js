@@ -32,17 +32,93 @@ function Mappage() {
   const [userlatitude, setuserlatitude]=useState(null);
   const [userlongitude,setuserlongitude]=useState(null);
   const mapRef = useRef(null);
-  const mylocation = useRef(null);
-  const [geo,setgeo]=useState(null);
-  const [mapSource, setMapSource] = useState(null);
+  const [useremail,setuseremail]=useState("km_karim@esi.dz");
   const [useradress,setuseradress]=useState(null);
   const [map,setmap]=useState(null);
-
+  const [categorie,setcategorie]=useState("");
+  const [type,settype]=useState("");
  
-  useEffect(()=>{
+  /*useEffect(()=>{
     const instruction=document.getElementById("instructions");
     instruction.style.display="none";
   },[]);
+  ////getting places of the wilaya 
+  useEffect(()=>{
+    const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
+    const requestOptions = {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      
+    };
+  
+    fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-place-by-id${id}`, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+     
+      console.log(data);
+    })
+    .catch(error => {
+     
+      console.error(error);
+    });
+
+   },[]);
+//getting activity of the wilaya 
+useEffect(()=>{
+  const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
+  const requestOptions = {
+    method: 'GET', 
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    
+  };
+
+  fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-activity${id}`, requestOptions)
+  .then(response => response.json())
+  .then(data => {
+   
+    console.log(data);
+  })
+  .catch(error => {
+   
+    console.error(error);
+  });
+
+ },[]);
+
+ //get comments 
+ useEffect(()=>{
+  const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
+  const requestOptions = {
+    method: 'GET', 
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    
+  };
+
+  fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-place-comments${id}`, requestOptions)
+  .then(response => response.json())
+  .then(data => {
+   
+    console.log(data);
+  })
+  .catch(error => {
+   
+    console.error(error);
+  });
+
+ },[]);*/
+
+
+
+
 
     const getRoute = async() => {
       const end = [selectedwilaya.latitude,selectedwilaya.longitude];
@@ -74,7 +150,7 @@ function Mappage() {
      if (map.getSource('route')) {
       map.getSource('route').setData(geojson);
     }
-    // otherwise, we'll make a new request
+    
     else {
       map.addLayer({
         id: 'route',
@@ -94,7 +170,7 @@ function Mappage() {
         }
       });
     }
-     ///instuctions part 
+    
       const instructions = document.getElementById("instructions");
       const steps = data.legs[0].steps;
 
@@ -119,7 +195,7 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
       
     };
     
-    
+   
 
 
     useEffect(() => {
@@ -128,7 +204,7 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
           async function (position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-             console.log ("you selected wilaya ", location.state.wilaya);
+             console.log ("you selected wilaya ", location.state.data+1);
             setuserlatitude(latitude);
             setuserlongitude(longitude);
             const response = await fetch(
@@ -160,32 +236,39 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
   instru.style.display="block";
  }
 
-
+ function recherche (){
+  console.log(categorie);
+  console.log(type);
+  //////requete pour le filtrage des types et des categorie 
+  setisready(!isready);
+ }
 
   return (
     <div className="Mappage">
      {showSideBar && clickedwilaya !== null && <Sidebar obj={{clickedwilaya , useradress}}/>}
     
-     <button id="commenter"  onClick={openModal}>Commenter</button>
-     <PopupComponent isOpen={isOpen} closeModal={closeModal} />
+     <button id="commenter"  onClick={openModal}>Comment</button>
+     <PopupComponent isOpen={isOpen} closeModal={closeModal} wilaya={location.state.wilaya} email={useremail} />
      
      <div className="Usersection"> 
    <img src={userimage} alt="userimage" id="userimage"/>
      <h4> Username</h4>
      </div>
      <div className="filtrage"> 
-     <p>Filtrage</p>
-      <select className="categorie">
-        <option>categorie1</option>
-        <option>categorie2</option>
-        <option>categorie3</option>
+     <button  id="recherche" onClick={()=>{recherche();}}> submit</button>
+      <select className="categorie" onChange={(e)=>{setcategorie(e.target.value)
+     }}>
+        <option>monuments</option>
+        <option>musées</option>
+        <option>places</option>
         <option>categorie4</option>
       </select>
 
-      <select className="type">
-        <option>type1</option>
-        <option>type2</option>
-        <option>type3</option>
+      <select className="type" onChange={(e)=>{settype(e.target.value);
+     }}>
+        <option>histoire</option>
+        <option>nature</option>
+        <option>mer</option>
         <option>type4</option>
       </select>
      

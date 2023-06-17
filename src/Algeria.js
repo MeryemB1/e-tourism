@@ -6,11 +6,13 @@ import { MapAlgeria } from "./MapAlgeria";
 import Bar from './bar';
 import Menu from "./Menu";
 import wilaya from './wilayas.json';
+import { useEffect } from "react";
 const Algeria =()=>{
+    
     const navigate = useNavigate();
 
-  const handleClick = (wilaya) => {
-    navigate('/Mappage',{state:{wilaya}});
+  const handleClick = (data) => {
+    navigate('/Mappage',{state:{data}});
   };
       const data = {
         Adrar: 0,
@@ -77,7 +79,7 @@ const Algeria =()=>{
         <Bar/>
          <Menu/>
          <div className="wilayas" id="wilayas">
-            <h3>Wilaya de l'Algerie</h3>
+            <h3>Algerian wilayas</h3>
            { wilaya.map(wilaya => (
              <button id="wilayabutton">{wilaya.name} {wilaya.code}</button>
            ))}
@@ -92,7 +94,7 @@ const Algeria =()=>{
           width="800px"
           data={data}
           onWilayaClick={(wilaya, data) => {console.log(wilaya, data);
-            handleClick(wilaya);
+            handleClick(data);
         }}
         />
         </div>

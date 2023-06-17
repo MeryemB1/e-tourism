@@ -235,6 +235,17 @@ border-radius: 29px;
   display: flex;
   color: black;
 }
+#recherche{
+  width: 24%;
+  height: 30px;
+  border-radius: 30px;
+  background-color:black;
+  color: white;
+  font-family: Poppins;
+  font-size: 11px;
+  cursor: pointer;
+  border: none;
+}
 #instructions{
   background-color: black;
   color: white;

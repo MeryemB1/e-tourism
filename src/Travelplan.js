@@ -15,10 +15,37 @@ function Travelplan (){
    const [dayrange,setdayrange]=useState("");
    const [categorieone,setcategorieone]=useState("");
    const [categorietwo,setcategorietwo]=useState("");
+   const [responsecontent,setreponsecontent]=useState("");
    function resultfunction ()
    {
-    console.log (city,budget,dayrange,categorieone,categorietwo)
-    setreponse(true);
+    console.log (city,budget,dayrange,categorieone,categorietwo);
+    /// la requete pour avoir le planning 
+       const tags= categorieone + ","+categorietwo;
+      const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
+      const requestOptions = {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        
+      };
+    
+      /*fetch(`https://fenetech-1-g8945601.deta.app/api/v1/get-planning${city}${budget}${dayrange}${tags}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+       
+        console.log(data);
+        setreponsecontent(data);
+        setreponse(true);
+      })
+      .catch(error => {
+       
+        console.error(error);
+      });*/
+  
+     
+    
    } 
 
    
@@ -79,18 +106,16 @@ return (
              <input placeholder="Budget"  onChange={(e)=>setbudget(e.target.value)}/> and I'll be available in the day range
                <input placeholder="Day-range"  onChange={(e)=>setdayrange(e.target.value)} /> and I love to visit
                  <select className="cat"  onChange={(e)=>setcategorieone(e.target.value)}>
-                    <option>option1</option>
-                    <option>option2</option>
-                    <option>option3</option>
-                    <option>option4</option>
-                    <option>option5</option>
+                 <option>monuments</option>
+                 <option>musées</option>
+                 <option>places</option>
+                 <option>categorie4</option>
                  </select>
                  <select className="cat"  onChange={(e)=>setcategorietwo(e.target.value)}>
-                 <option>option1</option>
-                    <option>option2</option>
-                    <option>option3</option>
-                    <option>option4</option>
-                    <option>option5</option>
+                 <option>histoire</option>
+                 <option>nature</option>
+                 <option>mer</option>
+                 <option>type4</option>
                  </select>
                  </h3>
 
