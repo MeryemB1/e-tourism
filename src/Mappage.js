@@ -26,6 +26,7 @@ import { comment } from "postcss";
 
 function Mappage() {
   const [mapwilaya,setmapwilaya]=useState([]);
+  const [passage,setpassage]=useState({});
   const [activity,setactivity]=useState([]);
   const location=useLocation();
   const [lng, setLng] = useState(1.6667);
@@ -242,9 +243,37 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
   console.log(categorie);
   console.log(type);
   //////requete pour le filtrage des types et des categorie 
-  setisready(!isready);
- }
+  fetch(`https://ffenneticcc.onrender.com/api/v1/get-place?categorie=${categorie}&theme=${type}`)
+  .then(response => response.json())
+  .then(data => {
+   
+    console.log(data);
+    if (data.length>0){
+      setmapwilaya(data);
+    }
+
+  })
+  .catch(error => {
+   
+    console.error(error);
+  });
+   
  
+ }
+ function recharger (){
+  fetch(`https://ffenneticcc.onrender.com/api/v1/get-place-by-wilaya/${location.state.wilaya}`)
+  .then(response => response.json())
+  .then(data => {
+    // Process the response data
+    console.log(data);
+    setmapwilaya(data);
+  })
+  .catch(error => {
+    // Handle any errors
+    console.error('Error:', error);
+  });
+
+ }
 
   return (
     <div className="Mappage">
@@ -255,24 +284,26 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
      
      <div className="Usersection"> 
    <img src={userimage} alt="userimage" id="userimage"/>
-     <h4> Username</h4>
+     <h4> Karim</h4>
      </div>
      <div className="filtrage"> 
      <button  id="recherche" onClick={()=>{recherche();}}> submit</button>
+     <button id="recherche" onClick={()=>{recharger()}}>clear</button>
       <select className="categorie" onChange={(e)=>{setcategorie(e.target.value)
      }}>
         <option>monuments</option>
         <option>musées</option>
         <option>places</option>
-        <option>categorie4</option>
+        <option>mosqué</option>
+        <option>centre commercial</option>
       </select>
 
       <select className="type" onChange={(e)=>{settype(e.target.value);
      }}>
-        <option>histoire</option>
-        <option>nature</option>
+        <option>HISTORIQUE</option>
+        <option>religion</option>
         <option>mer</option>
-        <option>type4</option>
+        <option>Shopping</option>
       </select>
      
      </div>
@@ -281,13 +312,14 @@ instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
      <div className="commentsection">
      
           
-      { Array.isArray(commentairecontent) && commentairecontent!==null && commentairecontent.map(()=>(
+      {commentairecontent && Array.isArray(commentairecontent)  &&
+       commentairecontent.map((commentairecontent)=>(
          <div className="comment" id="comment">
        
          <div className="personinfo">
            <div className="imagecontainer">
            <img src={person} alt="person" id="person"/>
-           </div>
+           </div> 
            <div className="name">
               <h3>{commentairecontent.emailUser}</h3>
               <p>Date : 30/11/2020</p>

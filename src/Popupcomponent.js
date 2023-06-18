@@ -25,29 +25,19 @@ const customStyles = {
 
 
 const PopupComponent = ({ isOpen, closeModal , wilaya , email}) => {
-function enregistrercommentaire (){
- /* const accessToken = 'a0UL8Wtmrv1e_mdzP2i5dCqk5yrxcSzvLsBUokxeuNW2H';
-    const requestOptions = {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-        body: JSON.stringify({commentadded , wilaya, email}),
-      },
-      
-    };
   
-    fetch('https://fenetech-1-g8945601.deta.app/api/v1/create-comment', requestOptions)
-    .then(response => response.json())
-    .then(data => {
-     
-      console.log(data);
+function enregistrercommentaire (){
+  const data = {
+    // Your data to be sent in the POST request
+    description: commentadded,
+    idPlace: 1,
+    emailUser: "usre@user.com",
+    idUser:1,
+
+  };
        closeModal();
-    })
-    .catch(error => {
-     
-      console.error(error);
-    });*/
+       window.location.reload();
+   
 console.log(commentadded);
  //// sauvgard dans la base de donnée 
 
